@@ -1,0 +1,17 @@
+{
+    "productName": "dashboard-standalone-app",
+    "version": "0.0.1",
+    "appId": "eu.envox.dashboard-standalone-app",
+    "copyright": "Copyright © 2023 Envox d.o.o",
+    "mac": {
+        "category": "public.app-category.utilities"
+    },
+    "synopsis": "EEZ standalone dashboard app demo",
+    "description": "EEZ standalone dashboard app demo",
+    "theme": "light",
+    "project": "my-app.eez-project",
+    "window": {
+        "width": 800,
+        "height": 480
+    }
+}

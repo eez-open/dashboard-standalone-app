@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:/emsdk/upstream/emscripten/cache/sysroot/include/emscripten",
+                "./packages/project-editor/flow/runtime/cpp",
+                "./packages/project-editor/flow/runtime/cpp/eez-runtime",
+                "./packages/project-editor/flow/runtime/cpp/eez-runtime/conf",
+                "./packages/project-editor/flow/runtime/cpp/eez/platform/simulator",
+                "./packages/project-editor/flow/runtime/cpp/eez/libs/agg"
+            ],
+            "defines": [
+                "DEBUG",
+                "EEZ_PLATFORM_LVGL",
+                "__EMSCRIPTEN__",
+                "OPTION_GUI=1",
+                "EEZ_FOR_LVGL"
+            ],
+            "windowsSdkVersion": "10.0.17134.0",
+            "compilerPath": "C:/MinGW/bin/g++.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x86"
+        }
+    ],
+    "version": 4
+}
