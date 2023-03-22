@@ -309,7 +309,6 @@
       "objID": "c49c1adf-a610-28c0-027c-0e452dadb32b",
       "name": "page",
       "inheritFrom": "",
-      "backgroundColor": "page_color",
       "css": "\n"
     }
   ],
