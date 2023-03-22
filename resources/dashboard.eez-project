@@ -259,7 +259,7 @@
           "objID": "ef43957f-0a9b-4a23-9776-c1186462ff2d",
           "type": "StartActionComponent",
           "left": 0,
-          "top": -161,
+          "top": -70,
           "width": 87,
           "height": 25,
           "customInputs": [],
@@ -269,7 +269,7 @@
           "objID": "45155454-d3e9-4b1f-a32b-7e5e838f0229",
           "type": "AnimateActionComponent",
           "left": 177,
-          "top": -161,
+          "top": -70,
           "width": 127,
           "height": 55,
           "customInputs": [],
@@ -309,6 +309,7 @@
       "objID": "c49c1adf-a610-28c0-027c-0e452dadb32b",
       "name": "page",
       "inheritFrom": "",
+      "backgroundColor": "page_color",
       "css": "\n"
     }
   ],

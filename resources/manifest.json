@@ -11,7 +11,7 @@
     "theme": "light",
     "project": "dashboard.eez-project",
     "window": {
-        "width": 850,
-        "height": 550
+        "width": 800,
+        "height": 450
     }
 }
