@@ -9,7 +9,7 @@
     "synopsis": "EEZ standalone dashboard app demo",
     "description": "EEZ standalone dashboard app demo",
     "theme": "light",
-    "project": "my-app.eez-project",
+    "project": "dashboard.eez-project",
     "window": {
         "width": 850,
         "height": 550
