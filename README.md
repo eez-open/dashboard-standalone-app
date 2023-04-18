@@ -1,3 +1,5 @@
+![Dashboard example](images/dashboard-standalone-app.png)
+
 -   Edit `resources\manifest.json` where you can set your dashboard eez-project file
 -   Change `icon.ico` and `icon.icns` files
 -   Add IEXT files in `resources\extensions`
