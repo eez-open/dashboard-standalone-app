@@ -129,7 +129,6 @@ export class ProjectEditorTab {
                 return;
             }
 
-            await projectEditorStore.loadAllExternalProjects();
             if (closed) {
                 return;
             }
