@@ -18,7 +18,7 @@ npm run dist
 #### Only Linux:
 
 ```
-sudo apt-get install build-essential libudev-dev
+sudo apt-get install build-essential libudev-dev libnss3
 ```
 
 #### Only Raspbian:
