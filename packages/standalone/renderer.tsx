@@ -147,6 +147,13 @@ export class ProjectEditorTab {
                     window.close();
                 }
             });
+
+            const onKeyDown = (e: KeyboardEvent) => {
+                if (this.projectStore?.runtime) {
+                    this.projectStore?.runtime.onKeyDown(e.key);
+                }
+            };
+            document.addEventListener("keydown", onKeyDown);
         } catch (err) {
             console.log(err);
             runInAction(() => {
@@ -161,7 +168,9 @@ export class ProjectEditorTab {
         }
 
         for (const variable of this.projectStore.project.allGlobalVariables) {
-            if (getObjectVariableTypeFromType(variable.type)) {
+            if (
+                getObjectVariableTypeFromType(this.projectStore, variable.type)
+            ) {
                 return true;
             }
         }
@@ -252,10 +261,10 @@ export async function installExtensionsAndInstrument() {
             }
         });
 
-        if (extension && extension.type == "instrument") {
+        if (extension && extension.extensionType == "iext") {
             let foundInstrumentObject: InstrumentObject | undefined;
 
-            instruments.forEach(instrumentObject => {
+            instruments.forEach((instrumentObject: InstrumentObject) => {
                 if (instrumentObject.instrumentExtensionId == extension!.id) {
                     foundInstrumentObject = instrumentObject;
                 }
