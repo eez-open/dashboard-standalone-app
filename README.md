@@ -1,15 +1,5 @@
 ![Dashboard example](images/dashboard-standalone-app.png)
 
--   Edit `resources\manifest.json` where you can set your dashboard eez-project file
--   Change `icon.ico` and `icon.icns` files
--   Add IEXT files in `resources\extensions`
--   Set `background.png` for Mac DMG package
-
-```
-npm install
-npm run build
-npm run dist
-```
 
 ### Build
 
@@ -33,16 +23,17 @@ sudo gem install fpm
 #### All platforms:
 
 ```
-git clone https://github.com/eez-open/studio
-cd studio
+git clone https://github.com/eez-open/dashboard-standalone-app
+cd dashboard-standalone-app
+```
+-   Edit `resources\manifest.json` where you can set your dashboard eez-project file
+-   Change `icon.ico` and `icon.icns` files
+-   Add IEXT files in `resources\extensions`
+-   Set `background.png` for Mac DMG package
+
+```
 npm install
 npm run build
-```
-
-Start with:
-
-```
-npm start
 ```
 
 Build distribution package:
@@ -50,3 +41,6 @@ Build distribution package:
 ```
 npm run dist
 ```
+
+You can find the installation files in the `dist` folder.
+
