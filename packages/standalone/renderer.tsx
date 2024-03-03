@@ -150,7 +150,7 @@ export class ProjectEditorTab {
 
             const onKeyDown = (e: KeyboardEvent) => {
                 if (this.projectStore?.runtime) {
-                    this.projectStore?.runtime.onKeyDown(e.key);
+                    this.projectStore?.runtime.onKeyDown(e);
                 }
             };
             document.addEventListener("keydown", onKeyDown);
