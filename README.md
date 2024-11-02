@@ -32,7 +32,7 @@ cd dashboard-standalone-app
 -   Set `background.png` for Mac DMG package
 
 ```
-npm clean-all
+npm run clean-all
 npm install
 npm run build
 ```
