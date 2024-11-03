@@ -40,13 +40,15 @@ import { ProjectEditorView } from "project-editor/project/ui/ProjectEditor";
 import { ProjectContext } from "project-editor/project/context";
 import { initProjectEditor } from "project-editor/project-editor-bootstrap";
 import { settingsController } from "home/settings";
-import { GlobalVariableStatuses } from "project-editor/features/variable/global-variable-status";
+import { RenderVariableStatus } from "project-editor/features/variable/global-variable-status";
 import {
     PageEditor,
     PageTabState
 } from "project-editor/features/page/PageEditor";
-import { getObjectVariableTypeFromType } from "project-editor/features/variable/value-type";
-import { firstTime } from "home/first-time";
+import {
+    getObjectVariableTypeFromType,
+    IObjectVariableValue
+} from "project-editor/features/variable/value-type";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -117,8 +119,9 @@ export class ProjectEditorTab {
             if (closed) {
                 return;
             }
-            const projectEditorStore = await ProjectStore.create();
-            projectEditorStore.standalone = true;
+            const projectEditorStore = await ProjectStore.create({
+                type: "standalone"
+            });
             if (closed) {
                 return;
             }
@@ -178,6 +181,64 @@ export class ProjectEditorTab {
         return false;
     }
 
+    get globalVariableStatuses() {
+        const projectStore = this.projectStore;
+        if (!projectStore) {
+            return undefined;
+        }
+
+        let globalVariablesStatus: React.ReactNode[] = [];
+
+        for (const variable of projectStore.project.allGlobalVariables) {
+            const objectVariableType = getObjectVariableTypeFromType(
+                projectStore,
+                variable.type
+            );
+            if (objectVariableType) {
+                let objectVariableValue: IObjectVariableValue | undefined =
+                    projectStore.dataContext.get(variable.fullName);
+
+                if (objectVariableValue) {
+                    const managedValue =
+                        objectVariableType.getValue(objectVariableValue);
+                    if (managedValue) {
+                        objectVariableValue = managedValue;
+                    }
+                }
+
+                globalVariablesStatus.push(
+                    <RenderVariableStatus
+                        key={variable.fullName}
+                        variable={variable}
+                        value={objectVariableValue}
+                        onClick={async () => {
+                            if (objectVariableType.editConstructorParams) {
+                                const constructorParams =
+                                    await objectVariableType.editConstructorParams(
+                                        variable,
+                                        objectVariableValue?.constructorParams ||
+                                            objectVariableValue,
+                                        true
+                                    );
+                                if (constructorParams !== undefined) {
+                                    projectStore.runtime!.setObjectVariableValue(
+                                        variable.fullName,
+                                        objectVariableType.createValue(
+                                            constructorParams,
+                                            true
+                                        )
+                                    );
+                                }
+                            }
+                        }}
+                    />
+                );
+            }
+        }
+
+        return globalVariablesStatus;
+    }
+
     render() {
         const projectEditorStore = this.projectStore;
         const runtime = projectEditorStore?.runtime;
@@ -189,11 +250,11 @@ export class ProjectEditorTab {
         return (
             <this.ProjectContext.Provider value={projectEditorStore}>
                 <div className="EezStudio_ProjectEditorWrapper">
-                    <div className="EezStudio_ProjectEditorMainContentWrapper">
+                    <div className="EezStudio_ProjectEditor_MainContentWrapper">
                         {this.anyObjectVariableType && (
                             <nav className="navbar justify-content-between EezStudio_ToolbarNav">
                                 <div />
-                                <GlobalVariableStatuses />
+                                <div>{this.globalVariableStatuses}</div>
                             </nav>
                         )}
 
@@ -331,10 +392,6 @@ async function main() {
     await installExtensionsAndInstrument();
 
     setTimeout(yarnInstall, 1000);
-
-    runInAction(() => {
-        firstTime.set(false);
-    });
 
     const root = createRoot(document.getElementById("EezStudio_Content")!);
     root.render(
